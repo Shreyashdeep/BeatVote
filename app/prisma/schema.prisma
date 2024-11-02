@@ -15,11 +15,6 @@ datasource db {
 
 
 model User{
-  provider="postgresql"
-  url=env("DATABASE_URL")
-}
-
-model User{
   id    String    @id  @default(uuid()) 
   email   String
   provider    Provider
@@ -30,6 +25,8 @@ model User{
 model Stream{
   id    String    @id @default(uuid())
   type    StreamType
+  url   String
+  extractedId   String
   active    Boolean   @default(true)
   upvotes   Upvote[]
   userId    String
@@ -42,12 +39,14 @@ model Upvote{
   streamId    String
   user    User    @relation(fields: [userId], references: [id])
   stream    Stream    @relation(fields: [streamId], references: [id])
+  @@unique([userId, streamId])
 
 }
 
 enum StreamType{
   Spotify
   EndUser
+  Youtube
 }
 
 enum Provider{
