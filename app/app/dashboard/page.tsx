@@ -125,8 +125,40 @@ async function refreshStreams(){
                 <Button type='submit' className='w-full bg-purple-700 hover:bg-purple-800 text-white'>Add to Queue</Button>
             </form>
             {inputLink && (
-                <Card className='bg-gray-900 border-gray-800'></Card>
+                <Card className='bg-gray-900 border-gray-800'>
+                    <CardContent className='p-4'>
+                        <img
+                            src="/placeholder.svg?height=200&width=320"
+                            alt='Video preview'
+                            className='w-full h-48 object-cover rounded'
+                            />
+                        <p className='mt-2 text-center text-grey-400'>Video Preview</p>
+                    </CardContent>
+                </Card>
             )}
+            <div className='space-y-4'>
+                <h2 className='text-2xl font-bold text-white'>Now playing</h2>
+                <Card className='bg-grey-900 border-gray-800'>
+                    <CardContent className='p-4'>
+                        {currentVideo ? (
+                            <>
+                                <img
+                                    src='/placeholder.svg?height=360&width=640'
+                                    alt='Current video'
+                                    className='w-full h-72 object-cover rounded'
+                                />
+                                <p className='mt-2 text-center font-semibold text-white'>{currentVideo.title}</p>
+                            </>
+                        ):(
+                            <p className='text-center py-8 text-grey-400'>No video playing</p>
+                        )}
+                    </CardContent>
+                </Card>
+                <Button onClick={playNext} className='w-full bg-purple-700 hover:bg-purple-800 text-white'>
+                    <Play className="mr-2 h-4 w-4"/>
+
+                </Button>
+            </div>
         </div>
     </div>
   )
